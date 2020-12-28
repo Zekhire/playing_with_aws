@@ -25,12 +25,12 @@ class KinesisProducer(threading.Thread):
         data = timestamp.isoformat()                    # convert date into useful format
 
         print(data)
-        print(kinesis.put_record(StreamName=self.stream_name, Data=data, PartitionKey="1"))
-        data = b"sasdsa" 
-        print(data)
-        print(kinesis.put_record(StreamName=self.stream_name, 
-                                Data=data, 
-                                PartitionKey="2sfsdfdsdsaf"))  # this should be veeeery different from "1" and "2"...
+        print(kinesis.put_record(StreamName=self.stream_name, Data=data, PartitionKey=part_key))
+        # data = b"sasdsa" 
+        # print(data)
+        # print(kinesis.put_record(StreamName=self.stream_name, 
+        #                         Data=data, 
+        #                         PartitionKey="2sfsdfdsdsaf"))  # this should be veeeery different from "1" and "2"...
 
     def run_continously(self):
         """put a record at regular intervals"""
@@ -50,9 +50,9 @@ class KinesisProducer(threading.Thread):
             
             
 
-stream_name = "poglad"
+stream_name = "stream_test"
 
-producer1 = KinesisProducer(stream_name, sleep_interval=2, id='2')
-producer2 = KinesisProducer(stream_name, sleep_interval=5, id='1')
+producer1 = KinesisProducer(stream_name, sleep_interval=2, id='1')
+# producer2 = KinesisProducer(stream_name, sleep_interval=5, id='1')
 producer1.run_continously()
-producer2.run_continously()
+# producer2.run_continously()

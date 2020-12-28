@@ -51,7 +51,7 @@ class KinesisConsumer:
         while finish > datetime.datetime.now():
             try:
                 response = kinesis.get_records(ShardIterator=next_iterator, Limit=25)
-
+                print(response)
                 records = response['Records']
                 
                 # print("====RECORDS=====")
@@ -78,7 +78,7 @@ class EchoConsumer(KinesisConsumer):
             
 shard_id = 'shardId-000000000000'
 iterator_type = 'LATEST'
-stream_name = "poglad"
+stream_name = "stream_test"
 
 worker = EchoConsumer(stream_name, shard_id, iterator_type, worker_time=20)
 
